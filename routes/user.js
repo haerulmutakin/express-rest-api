@@ -23,6 +23,7 @@ router.get('/', (req, resp) => {
     const param = req.query;
     const seledtedData = userData.find(item => item.name === param.username);
     if (seledtedData) {
+        console.log('local');
         resp.send(ResponseBody.success(seledtedData));
     } else {
         resp.statusCode = 400;
