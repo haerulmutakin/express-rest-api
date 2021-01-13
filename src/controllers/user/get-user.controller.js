@@ -1,6 +1,5 @@
-const express = require('express');
-const router = express.Router();
-
+const Utils = require('../../utils/response');
+const ResponseBody = new Utils();
 const userData = [
     {
         name: 'takin',
@@ -14,21 +13,17 @@ const userData = [
         name: 'mutakin',
         organization: 'adl'
     },
-]
+];
 
-const Utils = require('./core/utils/response');
-const ResponseBody = new Utils();
-
-router.get('/', (req, resp) => {
+const getUser = (req, resp) => {
     const param = req.query;
     const seledtedData = userData.find(item => item.name === param.username);
     if (seledtedData) {
-        console.log('local');
         resp.send(ResponseBody.success(seledtedData));
     } else {
         resp.statusCode = 400;
         resp.send('data not found');
     }
-});
+}
 
-module.exports = router;
+module.exports = getUser;
