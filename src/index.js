@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require('dotenv/config');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,7 +16,7 @@ app.use('/v1/api', routes);
 
 // Conncet to DB
 mongoose.connect(
-    'mongodb+srv://takin:takin@cluster0.cuffa.mongodb.net/<dbname>?retryWrites=true&w=majority&ssl=true',
+    process.env.DB_CONNECTION,
     {useUnifiedTopology: true},  () => {
         console.log('connected to DB')
 });

@@ -5,7 +5,6 @@ const postUser = (req, resp) => {
         name: body.name,
         organization: body.organization
     });
-    console.log(postUser);
     postUser.save().then(() => {
         resp.send('Berhasil menambah data pengguna')
     })
