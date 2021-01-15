@@ -17,9 +17,11 @@ app.use('/v1/api', routes);
 // Conncet to DB
 mongoose.connect(
     process.env.DB_CONNECTION,
-    {useUnifiedTopology: true},  () => {
+    {useUnifiedTopology: true, useNewUrlParser: true},
+    () => {
         console.log('connected to DB')
-});
+    }
+);
 
 
 app.listen(PORT, () => console.log('application run on port', PORT));
