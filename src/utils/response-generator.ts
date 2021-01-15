@@ -1,12 +1,12 @@
-const  ResponseBody = class {
-    detail(data) {
+export class ResponseBody {
+    detail(data: any) {
         return {
             result: true,
             data: data ? data : {}
         }
     }
 
-    list(data, total) {
+    list(data: Array<any>, total: number) {
         return {
             result: true,
             count: data.length,
@@ -16,14 +16,14 @@ const  ResponseBody = class {
         }
     }
 
-    success(message) {
+    success(message: string) {
         return {
             result: true,
             message: message
         }
     }
 
-    failed(message) {
+    failed(message: string) {
         return {
             result: false,
             message: message
@@ -37,5 +37,3 @@ const  ResponseBody = class {
         }
     }
 }
-
-module.exports = ResponseBody;

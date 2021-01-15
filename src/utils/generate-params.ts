@@ -1,14 +1,12 @@
-class ParamGenerator {
-    generateParams(params) {
+export class ParamGenerator {
+    public generateParams(params: any) {
         if (params.offset && params.limit) {
             params.offset = Number(params.offset);
             params.limit = Number(params.limit);
-            params.requestType = 'pagination';
+            params.pagination = true;
         } else {
-            params.requestType = 'default';
+            params.pagination = false;
         }
         return params;
     }
 }
-
-module.exports = ParamGenerator;
