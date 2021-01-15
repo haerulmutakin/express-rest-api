@@ -1,7 +1,7 @@
 import express from 'express';
 import userRouter from './user.route';
 
-const userRoute = express();
-userRoute.use('/user', userRouter);
+const appRoutes = express();
+appRoutes.use('/user', userRouter);
 
-export default userRoute;
+export default appRoutes;
