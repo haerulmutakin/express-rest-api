@@ -7,13 +7,13 @@ const paramGenerator = new ParamGenerator();
 const responseGenerator = new ResponseBody();
 
 export const getUser = async (req: Request, resp: Response) => {
-    const params = paramGenerator.generateParams(req.query);
+    const {limit, offset, params} = paramGenerator.generateParams(req.query);
     let userData = [], dataCount = 10;
     try {
-        if (params.pagination) {
-            userData = await User.find().limit(params.limit).skip(params.offset);
+        if (limit && offset) {
+            userData = await User.find(params).limit(Number(limit)).skip(Number(offset));
         } else {
-            userData = await User.find();
+            userData = await User.find(params);
         }
         resp.send(responseGenerator.list(userData, dataCount));
     } catch (error) {

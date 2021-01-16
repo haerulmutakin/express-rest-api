@@ -1,12 +1,16 @@
 export class ParamGenerator {
-    public generateParams(params: any) {
-        if (params.offset && params.limit) {
-            params.offset = Number(params.offset);
-            params.limit = Number(params.limit);
-            params.pagination = true;
-        } else {
-            params.pagination = false;
+    public generateParams(query: any) {
+        const params: any = {};
+        for (const key in query) {
+            if (Object.prototype.hasOwnProperty.call(query, key)) {
+                if (key !== 'limit' && key !== 'offset') {
+                    const element = query[key];
+                    params[key] = element;
+                    delete(query[key]);
+                }
+            }
         }
-        return params;
+        query.params = params;
+        return query;
     }
 }

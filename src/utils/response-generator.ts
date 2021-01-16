@@ -36,4 +36,12 @@ export class ResponseBody {
             message: 'Terjadi kesalahan pada server'
         }
     }
+
+    validationError(erros: any) {
+        return {
+            result: false,
+            message: 'Permintaan tidak valid',
+            validationError: erros
+        }
+    }
 }
