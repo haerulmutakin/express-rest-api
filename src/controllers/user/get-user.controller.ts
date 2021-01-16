@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Result, validationResult } from 'express-validator';
 import User from '../../models/user/post-user.model';
 import { ParamGenerator } from '../../utils/generate-params'; 
 import { ResponseBody } from '../../utils/response-generator';
@@ -7,6 +8,11 @@ const paramGenerator = new ParamGenerator();
 const responseGenerator = new ResponseBody();
 
 export const getUser = async (req: Request, resp: Response) => {
+    const validationError: Result = validationResult(req);
+    if (!validationError.isEmpty()) {
+        resp.status(422).send(responseGenerator.validationError(validationError.array()));
+        return;
+    }
     const {limit, offset, params} = paramGenerator.generateParams(req.query);
     let userData = [], dataCount = 10;
     try {

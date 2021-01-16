@@ -1,10 +1,16 @@
-import { check } from 'express-validator';
+import { body, query } from 'express-validator';
 
 export const postUserValidation = () => {
     return [
-        check('name')
+        body('name')
             .notEmpty().withMessage('Name is required'),
-        check('address')
+        body('address')
             .notEmpty().withMessage('Address is required')
+    ]
+}
+
+export const getUserValidation = () => {
+    return [
+        query('organization').notEmpty().withMessage('Organization is required')
     ]
 }
