@@ -3,9 +3,9 @@ import { body, query } from 'express-validator';
 export const postUserValidation = () => {
     return [
         body('name')
-            .notEmpty().withMessage('Name is required'),
+            .notEmpty().withMessage('Nama harus diisi'),
         body('address')
-            .notEmpty().withMessage('Address is required')
+            .notEmpty().withMessage('Alamat harus diisi')
     ]
 }
 

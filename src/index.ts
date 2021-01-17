@@ -18,7 +18,11 @@ app.use('/v1/api', appRoutes);
 
 mongoose.connect(
     DB_CONN,
-    {useUnifiedTopology: true, useNewUrlParser: true},
+    {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+        useCreateIndex: true
+    },
     () => {
         console.log('connected to DB')
     }
