@@ -5,10 +5,12 @@ import { postUserValidation } from '../controllers/user/user.validator';
 const userRouter = express.Router();
 const userController = new UserController();
 
-userRouter.get('/', userController.getUser);
-userRouter.get('/:id', userController.getUserById);
-userRouter.post('/', postUserValidation(), userController.postUser);
-userRouter.put('/:id', userController.putUser);
-userRouter.delete('/:id', userController.deleteUser)
+userRouter
+    .get('/', userController.getUser)
+    .post('/', postUserValidation(), userController.postUser);
+userRouter
+    .get('/:id', userController.getUserById)
+    .put('/:id', userController.putUser)
+    .delete('/:id', userController.deleteUser);
 
 export default userRouter;
