@@ -1,12 +1,13 @@
 import mongoose, { Schema } from 'mongoose';
 
 const UserSchema: Schema = new Schema({
-        name: {
+        username: {
             type: String,
             required: [true, 'Nama wajib diisi']
         },
-        address: String,
-        family: String
+        firstName: String,
+        lastName: String,
+        address: String
     }, {
         timestamps: true
     });
