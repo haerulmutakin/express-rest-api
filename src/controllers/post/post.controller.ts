@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { param } from 'express-validator';
 import Post from '../../models/post/post.model';
 import User from '../../models/user/user.model';
 import { ResponseBody } from '../../utils/response-generator';
@@ -29,9 +30,18 @@ export class PostController {
         let userData = [], dataCount = 10;
         try {
             userData = await Post.find(params);
-            userData.forEach((element: any) => {
-                console.log(element.author.username)
-            });
+            res.send(this.responseGenerator.list(userData, dataCount));
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(this.responseGenerator.error());
+        }
+    }
+
+    public getPostWithUserDetail = async (req: Request, res: Response) => {
+        const params = req.query;
+        const dataCount = 10;
+        try {
+            const userData: Array<any> = await Post.find(params).populate('author', ['username', 'firstName']);
             res.send(this.responseGenerator.list(userData, dataCount));
         } catch (error) {
             console.log(error);
