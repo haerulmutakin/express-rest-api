@@ -19,9 +19,9 @@ export class UserController {
         let userData = [], dataCount = 10;
         try {
             if (limit && offset) {
-                userData = await User.find(params).limit(Number(limit)).skip(Number(offset));
+                userData = await User.find(params).limit(Number(limit)).skip(Number(offset)).select(['username', 'firstName', 'lastName', 'email', 'createdAt', 'updatedAt']);
             } else {
-                userData = await User.find(params);
+                userData = await User.find(params).select(['username', 'firstName', 'lastName', 'email', 'createdAt', 'updatedAt']);
             }
             res.send(this.responseGenerator.list(userData, dataCount));
         } catch (error) {
@@ -50,6 +50,7 @@ export class UserController {
     
         const body = req.body;
         const userData  = new User(body);
+        console.log(userData);
         try {
             await userData.save();
             resp.send(this.responseGenerator.success('Berhasil menyimpan data'));
