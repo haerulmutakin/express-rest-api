@@ -20,7 +20,6 @@ export class PostController {
             await postData.save();
             res.send(this.responseGenerator.success('Berhasil menyimpan data'));
         } catch (error) {
-            console.log('error', error);
             res.status(400).send(this.responseGenerator.failed('Gagal menyimpan data'));
         }
     }
@@ -32,7 +31,6 @@ export class PostController {
             userData = await Post.find(params);
             res.send(this.responseGenerator.list(userData, dataCount));
         } catch (error) {
-            console.log(error);
             res.status(500).send(this.responseGenerator.error());
         }
     }
@@ -44,7 +42,6 @@ export class PostController {
             const userData: Array<any> = await Post.find(params).populate('author', ['username', 'firstName']);
             res.send(this.responseGenerator.list(userData, dataCount));
         } catch (error) {
-            console.log(error);
             res.status(500).send(this.responseGenerator.error());
         }
     }
@@ -59,7 +56,6 @@ export class PostController {
                 res.status(400).send(this.responseGenerator.failed('Gagal menghapus data'));
             }
         } catch (error) {
-            console.log(error);
             res.status(400).send(this.responseGenerator.failed('Gagal menghapus data'));
         }
     }
@@ -75,7 +71,6 @@ export class PostController {
             await Post.updateOne({_id: id}, body);
             res.send(this.responseGenerator.failed('Berhasil mengubah data'));
         } catch (error) {
-            console.log(error);
             res.status(400).send(this.responseGenerator.failed('Gagap mengubah data'));
         }
 

@@ -7,8 +7,7 @@ const userController = new UserController();
 
 userRouter
     .get('/', userController.getUser)
-    .post('/', postUserValidation(), userController.postUser);
-userRouter
+    .post('/', postUserValidation(), userController.postUser)
     .get('/:id', userController.getUserById)
     .put('/:id', userController.putUser)
     .delete('/:id', userController.deleteUser);

@@ -25,7 +25,6 @@ export class UserController {
             }
             res.send(this.responseGenerator.list(userData, dataCount));
         } catch (error) {
-            console.log(error);
             res.status(500).send(this.responseGenerator.error());
         }
     }
@@ -36,7 +35,6 @@ export class UserController {
             const userData = await User.findById(userId);
             resp.send(this.responseGenerator.detail(userData));
         } catch (error) {
-            console.log(error);
             resp.status(500).send(this.responseGenerator.error());
         }
     }
@@ -50,12 +48,10 @@ export class UserController {
     
         const body = req.body;
         const userData  = new User(body);
-        console.log(userData);
         try {
             await userData.save();
             resp.send(this.responseGenerator.success('Berhasil menyimpan data'));
         } catch (error) {
-            console.log('error', error);
             resp.status(400).send(this.responseGenerator.failed('Gagal menyimpan data'));
         }
     }
@@ -71,7 +67,6 @@ export class UserController {
             await User.updateOne({_id: userId}, body);
             resp.send(this.responseGenerator.success('Berhasil mengubah data'));
         } catch (error) {
-            console.log('error', error);
             resp.status(400).send(this.responseGenerator.failed('Gagal menyimpan data'));
         }
     }
@@ -87,7 +82,6 @@ export class UserController {
                 resp.send(this.responseGenerator.failed('Gagal menghapus data'));
             }
         } catch (error) {
-            console.log(error);
             resp.statusCode = 400;
             resp.send(this.responseGenerator.failed('Gagal menghapus data'));
         }
