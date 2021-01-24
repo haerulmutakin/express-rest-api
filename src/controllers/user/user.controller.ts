@@ -10,7 +10,6 @@ export class UserController {
     private responseGenerator = new ResponseBody();
 
     public getUser = async (req: Request, res: Response) => {
-        console.log(req.header);
         const validationError: Result = this.validationRes(req);
         if (!validationError.isEmpty()) {
             res.status(422).send(this.responseGenerator.validationError(validationError.array()));
@@ -68,7 +67,6 @@ export class UserController {
             return;
         }
         const userId = req.params.id;
-        console.log(body);
         try {
             await User.updateOne({_id: userId}, body);
             resp.send(this.responseGenerator.success('Berhasil mengubah data'));

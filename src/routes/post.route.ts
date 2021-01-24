@@ -7,6 +7,8 @@ const postController = new PostController();
 postRouter
     .get('/', postController.getPost)
     .get('/userDetail', postController.getPostWithUserDetail)
-    .post('/', postController.createPost);
+    .post('/', postController.createPost)
+    .delete('/:id', postController.deletePost)
+    .put('/:id', postController.updatePost)
 
 export default postRouter;

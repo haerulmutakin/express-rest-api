@@ -49,4 +49,36 @@ export class PostController {
         }
     }
 
+    public deletePost = async (req: Request, res: Response) => {
+        const { id } = req.params;
+        try {
+            const deletePost = await Post.deleteOne({_id: id});
+            if (deletePost.n > 0) {
+                res.send(this.responseGenerator.success('Berhasil menghapus data'));
+            } else {
+                res.status(400).send(this.responseGenerator.failed('Gagal menghapus data'));
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(400).send(this.responseGenerator.failed('Gagal menghapus data'));
+        }
+    }
+
+    public updatePost = async (req: Request, res: Response) => {
+        const {body, params} = req;
+        if (Object.keys(body).length === 0) {
+            res.status(400).send(this.responseGenerator.failed('Data perubahan tidak ditemukan'));
+            return;
+        }
+        const { id } = params;
+        try {
+            await Post.updateOne({_id: id}, body);
+            res.send(this.responseGenerator.failed('Berhasil mengubah data'));
+        } catch (error) {
+            console.log(error);
+            res.status(400).send(this.responseGenerator.failed('Gagap mengubah data'));
+        }
+
+    }
+
 }
